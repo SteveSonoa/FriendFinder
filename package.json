@@ -1,0 +1,26 @@
+{
+  "name": "friendfinder",
+  "version": "1.0.0",
+  "description": "An app that will locate friends who share similar interests with you.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SteveSonoa/FriendFinder.git"
+  },
+  "author": "Steve Marshall",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SteveSonoa/FriendFinder/issues"
+  },
+  "homepage": "https://github.com/SteveSonoa/FriendFinder#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "fs": "0.0.1-security",
+    "mysql": "^2.15.0",
+    "path": "^0.12.7"
+  }
+}
