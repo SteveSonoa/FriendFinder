@@ -174,20 +174,31 @@
 			if (userValidation()) {
 				// Store the user's answers
 				var formAnswers = {
-					name: $("#name").val(),
-					photo: $("#photo").val(),
-					answers: [ $("#q0").val(), $("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val() ]
+					"name": $("#yourName").val().trim(),
+					"photo": $("#yourImage").val().trim(),
+					"answers": [
+						parseInt($("#q0").val()),
+						parseInt($("#q1").val()),
+						parseInt($("#q2").val()),
+						parseInt($("#q3").val()),
+						parseInt($("#q4").val()),
+						parseInt($("#q5").val()),
+						parseInt($("#q6").val()),
+						parseInt($("#q7").val()),
+						parseInt($("#q8").val()),
+						parseInt($("#q9").val())
+					]
 				};
 
 				// AJAX POST to api/friends.
 				$.post("/api/friends", formAnswers, function(data) {
 
 					// Update the match modal with the correct name & image
-					$("#friendNameDiv").text(data.name);
-					$("#friendImg").attr("src", data.photo);
+					// $("#friendNameDiv").text(data.name);
+					// $("#friendImg").attr("src", data.photo);
 
-					// Show the match modal
-					$("#matchModal").modal("toggle");
+					// // Show the match modal
+					// $("#matchModal").modal("toggle");
 
 				});
 			}
