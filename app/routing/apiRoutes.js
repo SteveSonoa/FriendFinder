@@ -9,45 +9,55 @@ module.exports = function(app, path) {
 			}
 
 			else {
-				var output = data.split("%%%");
-				res.json(JSON.parse(output));
+				res.json(JSON.parse(data));
 			}
 		});
 	});
 
 	// Save the incoming result & determine the correct match
 	app.post("/api/friends", function(req, res) {
-		let output;
-		fs.readFile("app/data/friends.js", "utf8", function(err, data) {
-			if (err) {
-				return console.log(err);
-			}
 
-			else {
-				output = JSON.parse(data);
-				output.push(req.body);
+		// This will be the returned closest match object.
+		var returnMe = [];
 
+		// postResponse is a string of JSON information
+		var postResponse = JSON.stringify(req.body);
 
-				// This will add a comma after the previous entry before adding a new one
-				fs.appendFile("app/data/friends.js", JSON.stringify(output), function(err2) {
-					// If an error was experienced we say it.
-					if (err2) {
-						console.log(err2);
-					}
+		fs.readFile('app/data/friends.js', function (err, data) {
+			// Read the existing array
+		    var friendFile = JSON.parse(data);
 
-					// If no error is experienced, we'll log the phrase "Content Added" to our node console.
-					else {
-						console.log("Content Added!");
-					}
+		    // Store the difference in values
+		    var closestMatch = 0;
+		    var matchScore = 999999999999999;
 
-				});
+		    // Loop through the file to find the closest match
+		    for (var i = 0; i < friendFile.length; i++) {
+		    	var spaceBetween = 0;
+		    	for (var j = 0; j < friendFile[i]['answers[]'].length; j++) {
+		    		spaceBetween += Math.abs((parseInt(req.body['answers[]'][j]) - parseInt(friendFile[i]['answers[]'][j])));
+				}
+				// console.log("Person #" + i + ": " + friendFile[i].name);
+				// console.log("The space between you: " + spaceBetween);
+				// console.log("====================================");
 
-				res.json(JSON.parse(output));
+				if(spaceBetween <= matchScore) {
+					matchScore = spaceBetween;
+					closestMatch = i;
+		    	}
+		    }
 
+		    // console.log("Closest match: " + friendFile[closestMatch].name);
 
-			}
+		    returnMe.push(friendFile[closestMatch]);
+
+		    // Add the new person to the existing array
+		    friendFile.push(JSON.parse(postResponse));
+
+		    // Push back the entire updated result immediately
+		    fs.writeFile("app/data/friends.js", JSON.stringify(friendFile));
+			res.send(returnMe[0]);
+
 		});
-
-
 	});
 }

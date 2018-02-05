@@ -19,10 +19,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.5.1/chosen.jquery.min.js"></script>
 
-	<!-- Load External Local Files -->
-	<!-- <link rel="stylesheet" type="text/css" href="style.css"> -->
-	<!-- 	<script src="/../public/questions.js"></script> -->
-
 	<title>Friend Finder</title>
 
 	<style>
@@ -47,6 +43,28 @@
 </head>
 
 <body>
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+	  <div class="modal-dialog">
+
+	    <!-- Modal content-->
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <h2 class="modal-title"><strong>Your Best Match</strong></h2>
+	      </div>
+	      <div class="modal-body">
+	        <div id="friendNameDiv"></div>
+	        <img id="friendImg" class="img img-responsive" alt="" />
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+
+	  </div>
+	</div>
+
 	<div class="container" id="questionDiv">
 		<div class="row">
 			<div class="col-lg-12">
@@ -67,6 +85,8 @@
 			</div>
 		</div>
 	</div>
+
+
 
 	<script type="text/javascript">
 		function createQuestions() {
@@ -192,14 +212,12 @@
 
 				// AJAX POST to api/friends.
 				$.post("/api/friends", formAnswers, function(data) {
-
 					// Update the match modal with the correct name & image
-					// $("#friendNameDiv").text(data.name);
-					// $("#friendImg").attr("src", data.photo);
+					$("#friendNameDiv").html("<h2>" + data.name + "</h2>");
+					$("#friendImg").attr("src", data.photo);
 
-					// // Show the match modal
-					// $("#matchModal").modal("toggle");
-
+					// Show the match modal
+					$("#myModal").modal("toggle");
 				});
 			}
 
