@@ -14,7 +14,7 @@ The goal is to use deceptively deep personality questions to link 2 users togeth
 Deployment on a node server is required. This app is setup to listen on a Heroku default port; in the absence of Heroku, it sets the port to 8080 instead. Since no database management is required, setup should be a simple matter of simply uploading the files and having the server listen for a request.
 
 # Screen Capture
-![Screenshot](http://www.fullstacksteve.com/wp-content/uploads/2018/01/node-hangman-4.png)
+![Screenshot](http://www.fullstacksteve.com/wp-content/uploads/2018/02/friends-image-1.png)
 
 # Credits
 Steve Marshall, sole developer

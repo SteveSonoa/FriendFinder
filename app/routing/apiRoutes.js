@@ -37,10 +37,8 @@ module.exports = function(app, path) {
 		    	for (var j = 0; j < friendFile[i]['answers[]'].length; j++) {
 		    		spaceBetween += Math.abs((parseInt(req.body['answers[]'][j]) - parseInt(friendFile[i]['answers[]'][j])));
 				}
-				// console.log("Person #" + i + ": " + friendFile[i].name);
-				// console.log("The space between you: " + spaceBetween);
-				// console.log("====================================");
 
+				// If the space between the current listing is the closest to the user, update the closestMatch
 				if(spaceBetween <= matchScore) {
 					matchScore = spaceBetween;
 					closestMatch = i;
